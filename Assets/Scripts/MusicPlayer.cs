@@ -10,7 +10,15 @@ public class MusicPlayer : MonoBehaviour {
 
     private void Awake()
     {
-        DontDestroyOnLoad(gameObject);
+        int musicPlayersCount = FindObjectsOfType<MusicPlayer>().Length;
+        if (musicPlayersCount > 1)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            DontDestroyOnLoad(gameObject);
+        }
     }
 
     private void Start()
