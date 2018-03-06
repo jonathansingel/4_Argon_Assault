@@ -16,6 +16,8 @@ public class ScoreBoard : MonoBehaviour
 	
     public void addPoints(int points)
     {
+        //derp herp the derp
+
         score = score + points;
         scoreText.text = score.ToString();
     }
