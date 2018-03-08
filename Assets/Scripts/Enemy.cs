@@ -9,6 +9,9 @@ public class Enemy : MonoBehaviour {
     [SerializeField] Transform parent;
     [SerializeField] int pointsPerHit;
 
+    //[SerializeField] int healthPoints = 100;
+    [SerializeField] int hits = 10;
+
     ScoreBoard scoreBoard;
 
 	// Use this for initialization
@@ -26,8 +29,21 @@ public class Enemy : MonoBehaviour {
 
     private void OnParticleCollision(GameObject other)
     {
-        scoreBoard.addPoints(pointsPerHit);
+        ProcessHit();
+        if (hits <= 1)
+        {
+            KillEnemy();
+        }
+    }
 
+    private void ProcessHit()
+    {
+        scoreBoard.addPoints(pointsPerHit);
+        hits = hits - 1;
+    }
+
+    private void KillEnemy()
+    {
         GameObject explosion = Instantiate(enemyExplosion, transform.position, Quaternion.identity);
         explosion.transform.parent = parent;
         Destroy(gameObject);
